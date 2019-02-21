@@ -1,0 +1,118 @@
+<?php
+header("content-type:text/html;charset=utf-8");
+$servername = "127.0.0.1";
+$username = "root";
+$password = "22222";
+$dbname = "web_ads";
+
+
+// 创建连接
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// 检测连接
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+echo '
+  <br><br><br>
+ ';
+echo " Database connected successfully.<br>";
+echo "Welcome to our website. Choose which relations you want to look at:\n";
+echo '
+     <br><br><br>
+ ';
+
+$q = isset($_GET['q'])? htmlspecialchars($_GET['q']) : '';
+if($q) {
+    if($q =='User') {
+        echo 'here is the User relation';
+        echo '<br>';
+        echo '<br>';
+        $sql = "SELECT User_id, Encrypt_password, User_name, Phone, Email, Company_id FROM User;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // 输出数据
+            echo "Then have the following syntax: <br>(1)id                          (2)pwd                         (3)User_name                          (4)Phone                                (5)Email                       (6)Company_id <br>";
+
+            while($row = $result->fetch_assoc()) {
+                echo " ". $row["User_id"]. "  " . $row["Encrypt_password"]. "  " . $row["User_name"]. "  " . $row["Phone"]. "  ". $row["Email"]."  ". $row["Company_id"]."<br>";
+            }
+//            echo $result;
+        } else {
+            echo "No result, please insert data first.";
+        }
+
+    } else if($q =='Company') {
+        echo 'here is the Company relation';
+        echo '<br>';
+        echo '<br>';
+        $sql = "SELECT Company_id, Company_name, Address FROM Company;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // 输出数据
+            echo "Then have the following syntax: <br>(1)Company_id                          (2)Company_name                         (3)Address                          <br>";
+
+            while($row = $result->fetch_assoc()) {
+                echo " ". $row["Company_id"]. "  " . $row["Company_name"]. "  " . $row["Address"]."<br>";
+            }
+//            echo $result;
+        } else {
+            echo "No result, please insert data first.";
+        }
+    } else if($q =='Ads') {
+        echo 'here is the Ads relation';
+        echo '<br>';
+        echo '<br>';
+        $sql = "SELECT Ads_id, Ads_name, Ads_status, Link FROM Ads;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // 输出数据
+            echo "Then have the following syntax: <br>(1)Ads_id                          (2)Ads_name                         (3)Ads_status                   (4)Link      <br>";
+
+            while($row = $result->fetch_assoc()) {
+                echo " ". $row["Ads_id"]. "  " . $row["Ads_name"]. "  " . $row["Ads_status"]."  " . $row["Link"]."<br>";
+            }
+//            echo $result;
+        } else {
+            echo "0 结果";
+        }
+    }
+} else {
+    ?>
+    <form action="" method="get">
+        <select name="q">
+            <option value="">choose one relation:</option>
+            <option value="User">User relation</option>
+            <option value="Company">Company relation</option>
+            <option value="Ads">Ads relation</option>
+        </select>
+        <input type="submit" value="submit">
+    </form>
+    <?php
+}
+
+//echo '
+//
+// <!DOCTYPE html>
+// <html>
+//   <body>
+//     <form action="action_page.php">
+//            First name:<br>
+//     <input type="text" name="firstname" value="Mickey">
+//     <br>
+//            Last name:<br>
+//     <input type="text" name="lastname" value="Mouse">
+//     <br><br>
+//     <input type="submit" value="Submit">
+//     </form>
+//   </body>
+// </html>
+// ';
+
+
+
+
+?>

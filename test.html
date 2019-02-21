@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay</title>
+    <link href=\'https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600\' rel=\'stylesheet\' type=\'text/css\'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="form">
+    <div class="tab-content">
+        <a href="purchase.php" style="color: orangered; font-size:20px; float: right;text-decoration:underline"  >Create new purchase</a>
+        <h2> Checkout information:</h2>
+        <br>
+
+        <table style=" width:100%;">
+            <tr>
+                <th style="color: black">Ads_id</th>
+                <th style="color: black">Date</th>
+                <th style="color: black">Position</th>
+                <th style="color: black">Amount</th>
+            </tr>
+
+            <tr>
+                <td style="width: 10%;text-align: center;" >' . $ar[0] . '</td>
+                <td style="width: 35%;text-align: center;" >' . $ar[1] . '</td>
+                <td style="width: 25%;text-align: center;" >' . $ar[2] . '</td>
+                <td style="width: 20%;text-align: center;" >' . $ar[3] . '</td>
+            </tr>
+        </table>
+        <div style="float: right; vertical-align:middle;">
+        <h2 style="font-style: italic"> Total: '.$total.'</h2>
+
+
+            <form action="pay_process.php" method="POST" enctype="multipart/form-data">
+                <div style="float: right">
+                    <input type="submit" name="submit" value="submit" style="border:none; float: right;font-size: 18px">
+                </div>
+                <div style="float: right">
+                    <select name="pay">
+                    <option value="">Pay now?</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                    </select>
+                </div>
+
+        </form>
+        </div>
+
+
+    <br>
+    <br>
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    <br>
+    <a href=\'logout.php\' style="float: right">Log out</a>
+    <a href="index.php" >Return</a>
+    </div>
+</div>
+
+</body>
